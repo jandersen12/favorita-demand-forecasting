@@ -1,0 +1,25 @@
+# Data
+data/raw/
+data/interim/
+data/processed/
+*.csv
+*.parquet
+
+# Secrets
+kaggle.json
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+.vscode/
+.idea/
+
+# Outputs
+outputs/results/
