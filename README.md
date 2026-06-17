@@ -17,20 +17,16 @@ favorita-demand-forecasting/
 │   ├── raw/          
 │   ├── interim/      
 │   └── processed/    
-├── notebooks/        
+├── notebooks/
+    ├── 01-eda.ipynb
+    └── 02-baselines.ipynb
 ├── src/              
 │   ├── __init__.py
-│   ├── data.py       
-│   ├── features.py   
-│   ├── models.py     
-│   └── evaluate.py   
-├── sql/              
-├── outputs/
-│   ├── figures/
-│   └── results/      
+    ├── evaluate.py
+│   ├── make_dataset.py
+    ├── models.py
+    └── rolling_origin_cv.py 
 ├── .gitignore
-├── .dockerignore
 ├── requirements.txt
-├── Dockerfile
 └── README.md
 ```
