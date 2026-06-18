@@ -60,12 +60,10 @@ favorita-demand-forecasting/
 
 #### Overall
 
-```
-|---|---|---|
 |Model|RMSLE|WAPE|
+|---|---|---|
 |seasonal_naive|0.546429|0.169253|
 |ets|0.450813|0.150874|
-```
 
 ETS improved over the seasonal naive model by ~1.8% on the WAPE score and ~18% on the RMSLE score. This means that a model looking at level, trend and seasonality outperforms a model that only uses data from the previous week. 
 
