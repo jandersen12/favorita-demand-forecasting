@@ -19,13 +19,16 @@ favorita-demand-forecasting/
 │   └── processed/    
 ├── notebooks/
 │   ├── 01-eda.ipynb
-│   └── 02-baselines.ipynb
+│   ├── 02-baselines.ipynb
+│   └── 03-lightgbm.ipynb
 ├── src/              
 │   ├── __init__.py
 │   ├── evaluate.py
+│   ├── features.py
 │   ├── make_dataset.py
 │   ├── models.py
-│   └── rolling_origin_cv.py 
+│   ├── rolling_origin_cv.py 
+│   └── training.py
 ├── .gitignore
 ├── requirements.txt
 └── README.md
@@ -71,4 +74,4 @@ For the ETS model, the WAPE tells us that forecasts are still off by about 15% o
 
 #### By Product Family
 
-Predictions by ETS improve over seasonal naive in almost all families except for frozen foods and liqour/wine/beer. This shows robustness with the largest gains on volatile low-volume categories. We had discovered in the EDA that liqour/wine/beer shows irregular weekend patterns compared to the other families. It is possible that The WAPE scores for books, home appliances and baby care also exceed 1, which could be due to the low amounts of units sold (close to zero) in those categories, causing the WAPE scoring method to break down. However, we note that the RMSLE scores for those same categories show the ETS out-performing the seasonal naive model and staying stable. 
+Predictions by ETS improve over seasonal naive in almost all families except for frozen foods and liqour/wine/beer. This shows robustness with the largest gains on volatile low-volume categories. We had discovered in the EDA that liqour/wine/beer shows irregular weekend patterns compared to the other families. It is possible that The WAPE scores for books, home appliances and baby care also exceed 1, which could be due to the low amounts of units sold (close to zero) in those categories, causing the WAPE scoring method to break down. However, we note that the RMSLE scores for those same categories show the ETS out-performing the seasonal naive model and staying stable. The models struggling to predict these sparse series is an argument for a more advanced model that can generalize to all series while still capturing distinct series specific features. We will try this with the LightGBM model in the next phase. 
