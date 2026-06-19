@@ -26,7 +26,7 @@ def score_table(preds, model_name):
         "WAPE": wape(preds.y_true, preds.y_pred)
     }])
 
-    by_family = (preds.groupby("family").apply(lambda g: pd.Series({
+    by_family = (preds.groupby("family", observed=True).apply(lambda g: pd.Series({
         "RMSLE": rmsle(g.y_true, g.y_pred),
         "WAPE": wape(g.y_true, g.y_pred)
     })).reset_index().assign(model=model_name))

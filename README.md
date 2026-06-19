@@ -75,3 +75,33 @@ For the ETS model, the WAPE tells us that forecasts are still off by about 15% o
 #### By Product Family
 
 Predictions by ETS improve over seasonal naive in almost all families except for frozen foods and liqour/wine/beer. This shows robustness with the largest gains on volatile low-volume categories. We had discovered in the EDA that liqour/wine/beer shows irregular weekend patterns compared to the other families. It is possible that The WAPE scores for books, home appliances and baby care also exceed 1, which could be due to the low amounts of units sold (close to zero) in those categories, causing the WAPE scoring method to break down. However, we note that the RMSLE scores for those same categories show the ETS out-performing the seasonal naive model and staying stable. The models struggling to predict these sparse series is an argument for a more advanced model that can generalize to all series while still capturing distinct series specific features. We will try this with the LightGBM model in the next phase. 
+
+## LightGBM Findings
+
+### Assumptions
+
+- LightGBM will natively handle NaN values in the first lags in each series and also in the oil dataset.
+- It's critical to check for leakage across dates and ensure the validation/test data are not leaking into the training phases. 
+
+### Findings
+
+#### Overall
+
+|Model|RMSLE|WAPE|
+|---|---|---|
+|seasonal_naive|0.546429|0.169253|
+|ets|0.450813|0.150874|
+|lightgbm|0.402587|0.131917|
+
+LightGBM improved overall predictions by 0.05 over ETS and 0.14 over seasonal naive baselines. LightGBM also showed marginal improvements on the WAPE score, with forecasts being off by ~13% compared to ETS' 15% and seasonal naive's 17%.
+
+##### Error Analysis and SHAP
+
+Plotting the RMSLE scores grouped by horizon days shows that the scores increase over time, meaning that forecasts become less accurate as we increase the number of days we are attempting to forecast. There are noticeable drops in the RMSLE on days 6, 10, and 13, suggesting that there may be distinct patterns for those days that the model picks up on to make predictions.
+
+
+
+#### By Product Family
+
+LightGBM outperforms ETS and seasonal naive in most product families, with the notable exception of perishable families like bread, dairy, eggs, meats, poultry, prepared foods, and produce still achieving the best performance under the ETS model. My hypothesis is that since these items are perishable, they are normally sold in large quantities every week since consumers often need to replenish. Knowing this, it's possible that the ETS model offers a more simple prediction based on the 7-day seasonal pattern, and LightGBM might be adding too much variance to the model to where it ends up hurting the final predictions. AFter further investigation, I found that the product families where LightGBM loses to the seasonal naive models or ets models are the high-volume staples (dairy, eggs, etc.) whereas the product families where it definitively wins over the other models are those with intermittent or volatile purchases. From here, I can draw the conclusion that LightGBM doesn't improve the predictions for products where volume is high and purchase frequency is predictable because the naive predictions based on seasonality already capture the patterns pretty well. The one exception to this seems to be books, which is not a perishable item. 
+
