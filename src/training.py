@@ -44,11 +44,11 @@ def evaluate_lgbm(df, stores, oil, holidays, horizon=16, n_folds=4, feature_cols
     all_preds = []
 
     for fold, cutoff in enumerate(cutoffs):
-        train_mask = feats["date"] <= cutoff
-        test_mask = (feats["date"] > cutoff & (feats["date"] <= cutoff + pd.Timedelta(days=horizon)))
+        train_mask = (feats["date"] <= cutoff)
+        test_mask = ((feats["date"] > cutoff) & (feats["date"] <= cutoff + pd.Timedelta(days=horizon)))
 
         # Validation is the last 'horizon' days of train for early stopping
-        valid_start = cutoff = pd.Timedelta(days=horizon)
+        valid_start = cutoff - pd.Timedelta(days=horizon)
         fit_mask = train_mask & (feats["date"] <= valid_start)
         valid_mask = train_mask & (feats["date"] > valid_start)
 

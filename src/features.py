@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def add_lags(df, lags=(12,21,28)):
+def add_lags(df, lags=(16,21,28)):
     """Adds lags from a given set of lag lengths."""
     df = df.sort_values(["store_nbr", "family", "date"])
 
@@ -19,8 +19,13 @@ def add_rolling(df, windows=(7,14,30), horizon=16):
     grouped_base = base.groupby([df["store_nbr"], df["family"]], observed=True)
 
     for w in windows:
-        df[f"roll_mean_{w}"] = base.rolling(w).mean().reset_index(level=[0,1], drop=True)
-        df[f"roll_std_{w}"] = base.rolling(w).std().reset_index(level=[0,1], drop=True)
+        rm = grouped_base.rolling(w).mean()
+        rs = grouped_base.rolling(w).std()
+
+        rm.index = rm.index.get_level_values(-1)
+        rs.index = rs.index.get_level_values(-1)
+        df[f"roll_mean_{w}"] = rm
+        df[f"roll_std_{w}"] = rs
 
     return df
 
