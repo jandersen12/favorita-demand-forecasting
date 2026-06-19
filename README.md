@@ -99,7 +99,9 @@ LightGBM improved overall predictions by 0.05 over ETS and 0.14 over seasonal na
 
 Plotting the RMSLE scores grouped by horizon days shows that the scores increase over time, meaning that forecasts become less accurate as we increase the number of days we are attempting to forecast. There are noticeable drops in the RMSLE on days 6, 10, and 13, suggesting that there may be distinct patterns for those days that the model picks up on to make predictions.
 
+Forecasts are unbiased at the median, but a slight positive mean residual reflects occasional large demand spikes the model under-predicts, which has potential implications for inventory and sales if products are not available.
 
+The SHAP plot tells us that the roll mean and most recent sales lags (16,21) are providing the greatest signal for the model, which is expected considering the past weeks value is a decent predictor of the forecasted value. Products on promotion are also an indicator of the forecasted value, which is on par with the evidence we found in the EDA that unit sales for items on promotion was higher than those not on promotion. Oil prices is a feature that does not largely effect the forecast since it lands towards the bottom of the rankings. Interestingly, holidays also have little predictive power in the model. 
 
 #### By Product Family
 
