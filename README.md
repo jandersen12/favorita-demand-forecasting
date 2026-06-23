@@ -20,7 +20,8 @@ favorita-demand-forecasting/
 ├── notebooks/
 │   ├── 01-eda.ipynb
 │   ├── 02-baselines.ipynb
-│   └── 03-lightgbm.ipynb
+│   ├── 03-lightgbm.ipynb
+│   └── 04-disruption-analysis.ipynb
 ├── src/              
 │   ├── __init__.py
 │   ├── evaluate.py
@@ -107,3 +108,7 @@ The SHAP plot tells us that the roll mean and most recent sales lags (16,21) are
 
 LightGBM outperforms ETS and seasonal naive in most product families, with the notable exception of perishable families like bread, dairy, eggs, meats, poultry, prepared foods, and produce still achieving the best performance under the ETS model. My hypothesis is that since these items are perishable, they are normally sold in large quantities every week since consumers often need to replenish. Knowing this, it's possible that the ETS model offers a more simple prediction based on the 7-day seasonal pattern, and LightGBM might be adding too much variance to the model to where it ends up hurting the final predictions. AFter further investigation, I found that the product families where LightGBM loses to the seasonal naive models or ets models are the high-volume staples (dairy, eggs, etc.) whereas the product families where it definitively wins over the other models are those with intermittent or volatile purchases. From here, I can draw the conclusion that LightGBM doesn't improve the predictions for products where volume is high and purchase frequency is predictable because the naive predictions based on seasonality already capture the patterns pretty well. The one exception to this seems to be books, which is not a perishable item. 
 
+
+## Disruption Analysis Findings
+
+By training the model on data prior to the April 2016 Earthquake and then testing the model on data from two weeks before up until a month after the earthquake, we find that the model shows a large gap between the predicted and actual values on the test set. The WAPE is just below 20% before the earthquake, then increases to 30% in the days just around the quake before dropping down to just above 20% after the earthquake. When we group the forecasts into coastal and inland regions we find that the coastal regions, who were hit hardest by the earthquake, show a higher WAPE at 37% compared to the inland region's 29%. When we observe the ratio of true versus forecasted units by family, interestingly we see families like home appliances, electronics and baby care towards the top of the list. This is plausible given that during an earthquake things often break or are damaged within houses, so many people may need to purchase new home appliances or items that may have been damaged during the quake. However, we also know from previous EDA that these are generally low volume units, so I also looked at the difference in true versus predicted values by total units, which shows that gorcery, beverages, produce and cleaning were among the families with the highest excess demand in total units, which makes sense after an earthquake that emergency essentials like this would have excess demand compared to that which is forecasted.
