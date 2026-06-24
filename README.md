@@ -1,6 +1,6 @@
 # Favorita Demand Forecasting
 
-Find the Tableau dashboard for this project (here)[https://public.tableau.com/app/profile/jordan.andersen3718/viz/favorita_demand_forecasting_dashboard/demand_forecast_dashboard?publish=yes]. This dashboard utilizes the model prediction outputs exported from notebook 05-business-impact.ipynb.
+Find the Tableau dashboard for this project [here](https://public.tableau.com/app/profile/jordan.andersen3718/viz/favorita_demand_forecasting_dashboard/demand_forecast_dashboard?publish=yes). This dashboard utilizes the model prediction outputs exported from notebook 05-business-impact.ipynb.
 
 ## Objective
 
