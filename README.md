@@ -16,12 +16,16 @@ favorita-demand-forecasting/
 ├── data/
 │   ├── raw/          
 │   ├── interim/      
-│   └── processed/    
+│   └── processed/   
 ├── notebooks/
 │   ├── 01-eda.ipynb
 │   ├── 02-baselines.ipynb
 │   ├── 03-lightgbm.ipynb
-│   └── 04-disruption-analysis.ipynb
+│   ├── 04-disruption-analysis.ipynb
+│   └── 05-business-impact.ipynb
+├── outputs/ 
+│   ├── figures/
+│   └── results/
 ├── src/              
 │   ├── __init__.py
 │   ├── evaluate.py
@@ -112,3 +116,10 @@ LightGBM outperforms ETS and seasonal naive in most product families, with the n
 ## Disruption Analysis Findings
 
 By training the model on data prior to the April 2016 Earthquake and then testing the model on data from two weeks before up until a month after the earthquake, we find that the model shows a large gap between the predicted and actual values on the test set. The WAPE is just below 20% before the earthquake, then increases to 30% in the days just around the quake before dropping down to just above 20% after the earthquake. When we group the forecasts into coastal and inland regions we find that the coastal regions, who were hit hardest by the earthquake, show a higher WAPE at 37% compared to the inland region's 29%. When we observe the ratio of true versus forecasted units by family, interestingly we see families like home appliances, electronics and baby care towards the top of the list. This is plausible given that during an earthquake things often break or are damaged within houses, so many people may need to purchase new home appliances or items that may have been damaged during the quake. However, we also know from previous EDA that these are generally low volume units, so I also looked at the difference in true versus predicted values by total units, which shows that gorcery, beverages, produce and cleaning were among the families with the highest excess demand in total units, which makes sense after an earthquake that emergency essentials like this would have excess demand compared to that which is forecasted.
+
+### Business Impact
+
+- The improved forecast from the LightGBM model reduces the estimated error cost by $1,705,506 over the test window when compared to the seasonal naive model. 
+- Beverages, grocery and produce dominate the cost ranking, which is likely due to their volume since their per-unit error is low. Forecasting efforts should focus on these top categories for the biggest cost saving wins.
+- The model leans toward underforecasting for both perishable and non-perishable families, so a planner should bias safety stock upward. 
+- NOTE: These assumption parameters are illustrative, and in production would be switched out for a company's actual cost parameters.
