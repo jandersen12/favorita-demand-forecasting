@@ -6,9 +6,9 @@ End-to-end retail demand forecasting from raw sales data to a published dashboar
 
 DASHBOARD: [Tableau Dashboard](https://public.tableau.com/app/profile/jordan.andersen3718/viz/favorita_demand_forecasting_dashboard/demand_forecast_dashboard?publish=yes) 
 
-##### Data source 
+#### Data source:
 
-*Corporacion Favorita. (2018). Corporación Favorita Grocery Sales Forecasting [Data set]. Kaggle. https://www.kaggle.com/competitions/favorita-grocery-sales-forecasting/data.*
+*Kaggle. (2021). Store Sales – Time Series Forecasting [Data set]. Kaggle. https://www.kaggle.com/competitions/store-sales-time-series-forecasting/data*
 
 ## Results
 
