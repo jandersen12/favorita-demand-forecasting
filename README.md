@@ -4,9 +4,11 @@
 
 End-to-end retail demand forecasting from raw sales data to a published dashboard that shows where better forecasts save the most money.
 
-DASHBOARD: [Tableau Dashboard](https://public.tableau.com/app/profile/jordan.andersen3718/viz/favorita_demand_forecasting_dashboard/demand_forecast_dashboard?publish=yes). 
+DASHBOARD: [Tableau Dashboard](https://public.tableau.com/app/profile/jordan.andersen3718/viz/favorita_demand_forecasting_dashboard/demand_forecast_dashboard?publish=yes) 
 
-Data source: Corporacion Favorita. (2018). Corporación Favorita Grocery Sales Forecasting [Data set]. Kaggle. https://www.kaggle.com/competitions/favorita-grocery-sales-forecasting/data.
+##### Data source 
+
+*Corporacion Favorita. (2018). Corporación Favorita Grocery Sales Forecasting [Data set]. Kaggle. https://www.kaggle.com/competitions/favorita-grocery-sales-forecasting/data.*
 
 ## Results
 
@@ -38,7 +40,7 @@ Data source: Corporacion Favorita. (2018). Corporación Favorita Grocery Sales F
 
 ![forecast_v_actual_earthquake](https://github.com/jandersen12/favorita-demand-forecasting/blob/main/outputs/figures/forecast_v_actual_earthquake.png)
 
-## Setup
+## Structure
 
 ```
 favorita-demand-forecasting/
